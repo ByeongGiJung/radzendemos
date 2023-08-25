@@ -133,7 +133,7 @@ namespace RadzenDemos
                  typeof(ComponentBase).Assembly,
                  typeof(RadzenButton).Assembly,
                  typeof(ExpandoObject).Assembly,
-                 typeof(EventConsole).Assembly,
+                 // typeof(EventConsole).Assembly,
              };
 
              var referencedAssemblies = referenceAssemblyRoots
