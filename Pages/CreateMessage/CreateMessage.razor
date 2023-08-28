@@ -11,18 +11,33 @@
             <RadzenCard class="mb-2">
                 <RadzenRow class="mb-2">
                     <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
+                        <RadzenLabel Text="code" class="rz-text-body1" />
+                    </RadzenColumn>
+                    <RadzenColumn class="rz-col-9 rz-align-items-center d-flex">
+                        <RadzenTextBox @bind-Value="@jsonText" Disabled="false" />
+                    </RadzenColumn>
+                    <RadzenColumn class="rz-col-2 rz-align-items-center d-flex">
+                        <RadzenButton Text="메시지 작성" Click="@CreateJson" />
+                    </RadzenColumn>
+                </RadzenRow>
+            </RadzenCard>
+            <RadzenCard class="mb-2">
+                <RadzenRow class="mb-2">
+                    <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                         <RadzenLabel Text="거래소" class="rz-text-body1" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-5 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Exchanges" Class="w-auto" Placeholder="거래소를 선택하세요."
-                            @bind-Value="createMessageModel.exchange" />
+                            @bind-Value="createMessageModel.exchange" Name="Exchange"/>
+                        <RadzenRequiredValidator Component="Exchange" Text="필수 입력사항 입니다." Style="position: absolute" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                         <RadzenLabel Text="계정" class="rz-text-body1" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-5 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Accounts" Class="w-auto"
-                            @bind-Value="createMessageModel.account" />
+                            @bind-Value="createMessageModel.account" Name="Account" />
+                        <RadzenRequiredValidator Component="Account" Text="필수 입력사항 입니다." Style="position: absolute" />
                     </RadzenColumn>
                 </RadzenRow>
                 <RadzenRow class="mb-2">
@@ -31,7 +46,8 @@
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-5 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Symbols" Class="w-auto" Placeholder="거래할 종목을 선택하세요"
-                            @bind-Value="createMessageModel.symbol" />
+                            @bind-Value="createMessageModel.symbol" Name="Symbol"/>
+                        <RadzenRequiredValidator Component="Symbol" Text="필수 입력사항 입니다." Style="position: absolute" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                         <RadzenLabel Text="거래마켓" class="rz-text-body1" />
@@ -132,6 +148,7 @@
     CreateMessageModel createMessageModel;
     CreateMessageModelTypeList typeList = new();
     bool useAmount, useOpenOrder, useSameOrder, useTradingTime;
+    string jsonText;
 
     protected override async Task OnInitializedAsync()
     {
@@ -155,6 +172,11 @@
             timeslots.Add($"{i:00}:30");
         }
         return timeslots;
+    }
+
+    public void CreateJson()
+    {
+        jsonText = SerializeToJson(createMessageModel);
     }
 
     public static string SerializeToJson(CreateMessageModel data)
