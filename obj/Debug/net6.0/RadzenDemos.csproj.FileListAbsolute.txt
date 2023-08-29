@@ -111,3 +111,4 @@ C:\Users\admin\Documents\VS\practice\api_practice\RadzenDemos\bin\Debug\net6.0\r
 C:\Users\admin\Documents\VS\practice\api_practice\RadzenDemos\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\admin\Documents\VS\practice\api_practice\RadzenDemos\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\admin\Documents\VS\practice\api_practice\RadzenDemos\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\admin\Documents\VS\practice\api_practice\RadzenDemos\bin\Debug\net6.0\Newtonsoft.Json.dll

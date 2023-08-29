@@ -28,7 +28,7 @@
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-5 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Exchanges" Class="w-auto" Placeholder="거래소를 선택하세요."
-                            @bind-Value="createMessageModel.exchange" Name="Exchange"/>
+                            @bind-Value="createMessageModel.Exchange" Name="Exchange"/>
                         <RadzenRequiredValidator Component="Exchange" Text="필수 입력사항 입니다." Style="position: absolute" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
@@ -36,7 +36,7 @@
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-5 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Accounts" Class="w-auto"
-                            @bind-Value="createMessageModel.account" Name="Account" />
+                            @bind-Value="createMessageModel.Account" Name="Account" />
                         <RadzenRequiredValidator Component="Account" Text="필수 입력사항 입니다." Style="position: absolute" />
                     </RadzenColumn>
                 </RadzenRow>
@@ -46,7 +46,7 @@
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-5 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Symbols" Class="w-auto" Placeholder="거래할 종목을 선택하세요"
-                            @bind-Value="createMessageModel.symbol" Name="Symbol"/>
+                            @bind-Value="createMessageModel.Symbol" Name="Symbol"/>
                         <RadzenRequiredValidator Component="Symbol" Text="필수 입력사항 입니다." Style="position: absolute" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
@@ -54,7 +54,7 @@
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-5 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Markets" Class="w-auto" Placeholder="거래할 마켓을 선택하세요."
-                            @bind-Value="createMessageModel.market" />
+                            @bind-Value="createMessageModel.Market" />
                     </RadzenColumn>
                 </RadzenRow>
                 <RadzenRow class="mb-2">
@@ -63,14 +63,14 @@
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-5 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Types" Class="w-auto"
-                            @bind-Value="createMessageModel.type" />
+                            @bind-Value="createMessageModel.Type" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                         <RadzenLabel Text="주문방법" class="rz-text-body1" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-5 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Sides" Class="w-auto"
-                            @bind-Value="createMessageModel.side" />
+                            @bind-Value="createMessageModel.Side" />
                     </RadzenColumn>
                 </RadzenRow>
                 <RadzenRow>
@@ -79,14 +79,14 @@
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-5 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Prices" Class="w-auto"
-                            @bind-Value="createMessageModel.price" />
+                            @bind-Value="createMessageModel.Price" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                         <RadzenLabel Text="주문가격 대비 퍼센트(%)" class="rz-text-body1" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-5 rz-align-items-center d-flex">
-                        <RadzenNumeric AllowClear="false" TValue="int" Class="w-auto"
-                            @bind-Value="createMessageModel.price_pct" />
+                        <RadzenNumeric AllowClear="false" TValue="decimal" Class="w-auto"
+                            @bind-Value="createMessageModel.Price_Pct" />
                     </RadzenColumn>
                 </RadzenRow>
 
@@ -109,15 +109,15 @@
                         <RadzenLabel Text="주문수량(개수)" class="rz-text-body1" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-2 rz-align-items-center d-flex">
-                        <RadzenNumeric AllowClear="false" TValue="int?" Class="w-auto"
-                            @bind-Value="createMessageModel.amount" Disabled="useAmount"/>
+                        <RadzenNumeric AllowClear="false" TValue="decimal?" Class="w-auto"
+                            @bind-Value="createMessageModel.Amount" Disabled="useAmount"/>
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                         <RadzenLabel Text="주문화폐" class="rz-text-body1" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-2 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Amount_Types" Class="w-auto"
-                            @bind-Value="createMessageModel.amount_type" Disabled="useAmount" />
+                            @bind-Value="createMessageModel.Amount_type" Disabled="useAmount" />
                     </RadzenColumn>
 
                     <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
@@ -125,16 +125,48 @@
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-2 rz-align-items-center d-flex">
                         <RadzenDropDown AllowClear="false" TValue="string" Data="CreateMessageModelTypeList.Equity_Types" Class="w-auto"
-                            @bind-Value="createMessageModel.equity" Disabled="!useAmount" />
+                            @bind-Value="createMessageModel.RawEquity" Disabled="!useAmount" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                         <RadzenLabel Text="주문수량" class="rz-text-body1" />
                     </RadzenColumn>
                     <RadzenColumn class="rz-col-2 rz-align-items-center d-flex">
-                        <RadzenNumeric AllowClear="false" TValue="int?" Class="w-auto"
-                            @bind-Value="createMessageModel.bal_pct" Disabled="!useAmount"/>
+                        <RadzenNumeric AllowClear="false" TValue="decimal?" Class="w-auto"
+                            @bind-Value="createMessageModel.Bal_Pct" Disabled="!useAmount"/>
                     </RadzenColumn>
-
+                </RadzenRow>
+                <RadzenRow>
+                    <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
+                        <RadzenCheckBox Name="OpenOrder" TValue="bool"
+                            @bind-Value="useOpenOrder" />
+                        <RadzenLabel Text="미채결 주문 취소" class="rz-text-body1" />
+                    </RadzenColumn>
+                    <RadzenColumn class="rz-col-3 rz-align-items-center d-flex">
+                        <RadzenDropDown AllowCrear="false" TValue="string" Data="CreateMessageModelTypeList.Open_Orders" Class="w-auto"
+                            @bind-Value="createMessageModel.Open_Order" Disabled="!useOpenOrder" />
+                    </RadzenColumn>
+                    <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
+                        <RadzenCheckBox Name="OpenOrder" TValue="bool"
+                            @bind-Value="useSameOrder" />
+                        <RadzenLabel Text="동일주문 연속실행 방지" class="rz-text-body1" />
+                    </RadzenColumn>
+                    <RadzenColumn class="rz-col-3 rz-align-items-center d-flex">
+                        <RadzenDropDown AllowCrear="false" TValue="string" Data="CreateMessageModelTypeList.Open_Orders" Class="w-auto"
+                            @bind-Value="createMessageModel.Open_Order" Disabled="!useSameOrder" />
+                    </RadzenColumn>
+                    <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
+                        <RadzenCheckBox Name="OpenOrder" TValue="bool"
+                            @bind-Value="useTradingTime" />
+                        <RadzenLabel Text="주문시간대 설정" class="rz-text-body1" />
+                    </RadzenColumn>
+                    <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
+                        <RadzenDropDown AllowCrear="false" TValue="string" Data="GenerateTimeSlots()" Class="w-auto" Placeholder="hh:mm"
+                            @bind-Value="selectedStartTime" Change="@(args => OnStartTimeChanged((string)args))" Disabled="!useTradingTime" />
+                    </RadzenColumn>
+                    <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
+                        <RadzenDropDown AllowCrear="false" TValue="string" Data="GenerateTimeSlots()" Class="w-auto" Placeholder="hh:mm"
+                            @bind-Value="selectedEndTime" Change="@(args => OnEndTimeChanged((string)args))" Disabled="!useTradingTime" />
+                    </RadzenColumn>
                 </RadzenRow>
             </RadzenCard>
 
@@ -148,17 +180,17 @@
     CreateMessageModel createMessageModel;
     CreateMessageModelTypeList typeList = new();
     bool useAmount, useOpenOrder, useSameOrder, useTradingTime;
-    string jsonText;
+    string selectedStartTime, selectedEndTime, jsonText;
 
     protected override async Task OnInitializedAsync()
     {
         List<string> timeslots = GenerateTimeSlots();
         createMessageModel = new CreateMessageModel()
                              {
-                                account = "기본계정",
-                                type = "limit",
-                                side = "buy",
-                                price = "LAST"
+                                Account = "기본계정",
+                                Type = "limit",
+                                Side = "buy",
+                                Price = "LAST"
                              };
         useAmount = false;
     }
@@ -174,21 +206,43 @@
         return timeslots;
     }
 
-    public void CreateJson()
+    private void CreateJson()
     {
         jsonText = SerializeToJson(createMessageModel);
+    }
+
+    private void OnStartTimeChanged(string startTime)
+    {
+        selectedStartTime = startTime;
+        UpdateTradingTime();
+    }
+
+    private void OnEndTimeChanged(string endTime)
+    {
+        selectedEndTime = endTime;
+        UpdateTradingTime();
+    }
+
+    private void UpdateTradingTime()
+    {
+        if (!string.IsNullOrEmpty(selectedStartTime) && !string.IsNullOrEmpty(selectedEndTime))
+        {
+            createMessageModel.Trading_Time = $"{selectedStartTime}-{selectedEndTime}";
+        }
     }
 
     public static string SerializeToJson(CreateMessageModel data)
     {
         var options = new JsonSerializerOptions
         {
-            WriteIndented = true, // 가독성을 위해 줄 바꿈과 들여쓰기 사용
-            Converters = { new DecimalToStringConverter() } // 커스텀 변환기 사용
+            WriteIndented = true,
+            Converters = { new DecimalToStringConverter() },
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
 
         return JsonSerializer.Serialize(data, options);
-}
+    }
 
     public class DecimalToStringConverter : System.Text.Json.Serialization.JsonConverter<decimal>
     {
