@@ -10,21 +10,21 @@
     <RadzenRow>
         <RadzenColumn>
             <RadzenTemplateForm TItem="CreateMessageModel" Data="@createMessageModel" Submit=@CreateJson InvalidSubmit=@OnInvalidSubmit >
-                <RadzenCard class="mb-2">
-                    <RadzenRow class="mb-2">
+                <RadzenCard class="mb-3">
+                    <RadzenRow class="mb-3">
                         <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                             <RadzenLabel Text="code" class="rz-text-body1" />
                         </RadzenColumn>
                         <RadzenColumn class="rz-col-9 rz-align-items-center d-flex">
-                            <RadzenTextBox @bind-Value="@jsonText" Disabled="true" />
+                            <RadzenTextBox @bind-Value="@jsonText" Disabled="true" style="width: 100%;" />
                         </RadzenColumn>
                         <RadzenColumn class="rz-col-2 rz-align-items-center d-flex">
                             <RadzenButton ButtonType="ButtonType.Submit" Text="메시지 작성" />
                         </RadzenColumn>
                     </RadzenRow>
                 </RadzenCard>
-                <RadzenCard class="mb-2">
-                    <RadzenRow class="mb-2">
+                <RadzenCard class="mb-3">
+                    <RadzenRow class="mb-3">
                         <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                             <RadzenLabel Text="거래소" class="rz-text-body1" />
                         </RadzenColumn>
@@ -42,7 +42,7 @@
                             <RadzenRequiredValidator Component="Account" Text="필수 입력사항 입니다." Style="position: absolute" />
                         </RadzenColumn>
                     </RadzenRow>
-                    <RadzenRow class="mb-2">
+                    <RadzenRow class="mb-3">
                         <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                             <RadzenLabel Text="거래종목" class="rz-text-body1" />
                         </RadzenColumn>
@@ -59,7 +59,7 @@
                                 @bind-Value="createMessageModel.Market" />
                         </RadzenColumn>
                     </RadzenRow>
-                    <RadzenRow class="mb-2">
+                    <RadzenRow class="mb-3">
                         <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                             <RadzenLabel Text="주문유형" class="rz-text-body1" />
                         </RadzenColumn>
@@ -75,7 +75,7 @@
                                 @bind-Value="createMessageModel.RawSide" />
                         </RadzenColumn>
                     </RadzenRow>
-                    <RadzenRow>
+                    <RadzenRow class="mb-3">
                         <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                             <RadzenLabel Text="주문가격" class="rz-text-body1" />
                         </RadzenColumn>
@@ -92,7 +92,7 @@
                         </RadzenColumn>
                     </RadzenRow>
 
-                    <RadzenRow>
+                    <RadzenRow class="mb-3">
                         <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                             <RadzenLabel Text="주문수량 방법 선택" class="rz-text-body1" />
                         </RadzenColumn>
@@ -106,7 +106,7 @@
                             </RadzenSelectBar>
                         </RadzenColumn>
                     </RadzenRow>
-                    <RadzenRow>
+                    <RadzenRow class="mb-3">
                         <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                             <RadzenLabel Text="주문수량(개수)" class="rz-text-body1" />
                         </RadzenColumn>
@@ -137,7 +137,7 @@
                                 @bind-Value="createMessageModel.Bal_Pct" Disabled="useAmount"/>
                         </RadzenColumn>
                     </RadzenRow>
-                    <RadzenRow>
+                    <RadzenRow class="mb-3">
                         <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                             <RadzenCheckBox Name="OpenOrder" TValue="bool"
                                 @bind-Value="useOpenOrder" />
@@ -145,7 +145,7 @@
                         </RadzenColumn>
                         <RadzenColumn class="rz-col-3 rz-align-items-center d-flex">
                             <RadzenDropDown AllowCrear="false" TValue="string" Data="CreateMessageModelTypeList.Open_Orders" Class="w-auto"
-                                @bind-Value="createMessageModel.Open_Order" Disabled="!useOpenOrder" />
+                                @bind-Value="createMessageModel.RawOpenOrder" Disabled="!useOpenOrder" />
                         </RadzenColumn>
                         <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                             <RadzenCheckBox Name="OpenOrder" TValue="bool"
@@ -153,8 +153,8 @@
                             <RadzenLabel Text="동일주문 연속실행 방지" class="rz-text-body1" />
                         </RadzenColumn>
                         <RadzenColumn class="rz-col-3 rz-align-items-center d-flex">
-                            <RadzenDropDown AllowCrear="false" TValue="string" Data="CreateMessageModelTypeList.Open_Orders" Class="w-auto"
-                                @bind-Value="createMessageModel.Open_Order" Disabled="!useSameOrder" />
+                            <RadzenDropDown AllowCrear="false" TValue="string" Data="CreateMessageModelTypeList.Same_Orders" Class="w-auto"
+                                @bind-Value="createMessageModel.RawSameOrder" Disabled="!useSameOrder" />
                         </RadzenColumn>
                         <RadzenColumn class="rz-col-1 rz-align-items-center d-flex">
                             <RadzenCheckBox Name="OpenOrder" TValue="bool"
@@ -242,7 +242,9 @@
             PropertyNamingPolicy = new SnakeCaseNamingPolicy()
         };
 
-        return JsonSerializer.Serialize(data, options);
+        var json = JsonSerializer.Serialize(data, options);
+
+        return $"TVM : {json} : MVT";
     }
 
     // 소문자 변환

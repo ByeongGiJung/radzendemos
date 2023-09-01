@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using RadzenDemos.Data;
 using Radzen;
-using RadzenDemos.Models.Northwind;
 using RadzenDemos;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,18 +15,11 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddHttpClient();
-// builder.Services.AddScoped<ThemeService>();
-builder.Services.AddScoped<CompilerService>();
 
 builder.Services.AddScoped<DialogService>();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddScoped<TooltipService>();
 builder.Services.AddScoped<ContextMenuService>();
-
-builder.Services.AddDbContextFactory<NorthwindContext>();
-
-builder.Services.AddScoped<NorthwindService>();
-// builder.Services.AddScoped<NorthwindODataService>();
 
 builder.Services.AddLocalization();
 
