@@ -63,7 +63,7 @@ namespace TempTitle.Data.ViewModel.CreateMessageModel
         };
 
         // 주문가격
-        // LAST, BID, ASK, string(소수점포함 실수로 작성가능 / 숫자가 아니면 작성x하고 오류메시지 출력)
+        // LAST, BID, ASK, string(소수점포함 자리수제한 없이 실수로 작성가능 / 숫자가 아니면 작성x하고 오류메시지 출력)
         public string _price;
         [JsonIgnore]
         public string RawPrice
@@ -81,7 +81,7 @@ namespace TempTitle.Data.ViewModel.CreateMessageModel
         };
 
         // 주문가격대비 퍼센트(%)
-        // 선택사항 : 왼쪽 대비 싸게 매수할 경우 -n(%)을 입력(마이너스값)
+        // 선택사항 : 왼쪽 대비 싸게 매수할 경우 -n(%)을 입력(마이너스값) / 100이하
         // 소수점 2번째 자리까지 가능
         public decimal Price_Pct { get; set; }
 
@@ -91,6 +91,7 @@ namespace TempTitle.Data.ViewModel.CreateMessageModel
         public decimal? Amount { get; set; }
         // 주문타입
         // 1INCH, KRW
+        // TODO : 거래종목에 맞춰 변경
         public string? Amount_type { get; set; }
 
         // 기준자산
@@ -114,14 +115,59 @@ namespace TempTitle.Data.ViewModel.CreateMessageModel
         //===== 선택 사항 =====
         // 미체결 주문 취소
         // 전부취소 : cancel, 매수주문만 : cancel-buy, 매도주문만 : cancel-sell
-        public string? Open_Order { get; set; }
+        public string? _openOrder;
+        [JsonIgnore]
+        public string? RawOpenOrder
+        {
+            get => _openOrder;
+            set => _openOrder = value;
+
+        }
+        public string? Open_Order => _openOrder switch
+        {
+            "전부 취소" => "cancel",
+            "매수 주문만 취소" => "cancel-buy",
+            "매도 주문만 취소" => "cancel-sell",
+            _ => null
+        };
+
         // 동일주문 연속실행 방지
         // n분이내 유효 : "skip-{n}m", n시간이내 유효 : "skip-{n}h"
-        public string? Same_Order { get; set; }
+        public string? _sameOrder;
+        [JsonIgnore]
+        public string? RawSameOrder
+        {
+            get => _sameOrder;
+            set => _sameOrder = value;
+        }
+        public string? Same_Order => ConvertToSameOrder(_sameOrder);
+        private static string ConvertToSameOrder(string? input)
+        {
+            if(input is null)
+            {
+                return null;
+            }
+            else if (input == "시간제한없음")
+            {
+                return "skip";
+            }
+            else if (input.Contains("분이내만 유효"))
+            {
+                int minutes = int.Parse(input.Split('분')[0]);
+                return $"skip-{minutes}m";
+            }
+            else if (input.Contains("시간이내만 유효"))
+            {
+                int hours = int.Parse(input.Split('시')[0]);
+                return $"skip-{hours}h";
+            }
+
+            throw new NotImplementedException();
+        }
+
         // 주문 시간대 설정
         // hh:mm-hh:mm : 00:30-02:00
         public string? Trading_Time { get; set; }
-
         // 지연시간
         // 소수점 1번째 자리까지 입력가능
         public decimal? delay { get; set; }
@@ -146,6 +192,9 @@ namespace TempTitle.Data.ViewModel.CreateMessageModel
         public static List<string> Amount_Types => new List<string> { "Current", "KRW" };
         public static List<string> Equity_Types => new List<string> { "잔액대비", "총자산대비" };
         public static List<string> Prices => new List<string> { "LAST(마지막 체결가격)", "BID(매수호가에서 최고가격)", "ASK(매도호가에서 최저가격)", "직접입력" };
-        public static List<string> Open_Orders => new List<string> { "cancel", "cancel-buy", "cancel-sell", "cancel-close" };
+        public static List<string> Open_Orders => new List<string> { "전부 취소", "매수 주문만 취소", "매도 주문만 취소" };
+        public static List<string> Same_Orders => new List<string> { "시간제한없음", "1분이내만 유효", "3분이내만 유효", "5분이내만 유효", "15분이내만 유효", "30분이내만 유효", "1시간이내만 유효", "2시간이내만 유효", "4시간이내만 유효", "6시간이내만 유효", "12시간이내만 유효", "24시간이내만 유효"};
     }
+
+
 }
