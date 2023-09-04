@@ -1,0 +1,12 @@
+.vs/
+.vs/*
+.vscode/
+.git/
+.git/*
+*.user
+*.log
+bin/
+bin/*
+obj/
+obj/*
+*.config
