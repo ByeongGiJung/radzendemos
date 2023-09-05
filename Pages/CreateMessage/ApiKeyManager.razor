@@ -1,0 +1,53 @@
+@page "/apikeyManager"
+
+@using TempTitle.Data.ViewModel.ApikeyManagerModel
+
+<PageTitle> APIKEY 관리 </PageTitle>
+
+<RadzenContentContainer>
+    <RadzenRow>
+        <RadzenCard class="mb-2">
+            <RadzenRow>
+                <RadzenDataGrid AllowFiltering="true" PageSize="10" AllowPaging="true"
+                    Data="@apiKeyData" TItem="ApikeyManagerModel" IsLoading="@isLoading" PageSizeOptions="@pageSizeOptions"
+                    @bind-Value="@selectedApiKeyData" SelectionMode="DataGridSelectionMode.Single"
+                    ColumnWidth="300px" AllowSorting="true" ShowPagingSummary="true"
+                    PagerHorizontalAlign="HorizontalAlign.Center" AllowColumnResize="true"
+                    FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                    FilterMode="FilterMode.Advanced" AllowRowSelectOnRowClick="false"
+                    RowDoubleClick="@CallApiKeyModel">
+                    <EmptyTemplate>
+                        <p style="color: lightgray; font-size: 24px; text-align: center">조회되는 데이터가 없습니다.</p>
+                    </EmptyTemplate>
+                    <Columns>
+                        <RadzenDataGridColumn TItem="ApikeyManagerModel" Property="ExchangeName" Title="거래소" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn TItem="ApikeyManagerModel" Property="AccountName" Title="계정명" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn TItem="ApikeyManagerModel" Property="ApiKey" Title="API키" TextAlign="TextAlign.Center" />
+                        <RadzenDataGridColumn TItem="ApikeyManagerModel" Property="SecretKey" Title="시크릿키" TextAlign="TextAlign.Center" />
+                    </Columns>
+
+                </RadzenDataGrid>
+            </RadzenRow>
+        </RadzenCard>
+    </RadzenRow>
+</RadzenContentContainer>
+
+@code {
+    // 회원 계정 구분 ?
+    long? accountNumber = null;
+    bool isLoading;
+    IList<ApikeyManagerModel> selectedApiKeyData;
+    IEnumerable<ApikeyManagerModel> apiKeyData;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        // apiKeyData = await ApiKeyManagerService.Get~~~;
+        isLoading = false;
+    }
+
+    private async Task CallApiKeyModel()
+    {
+
+    }
+}
